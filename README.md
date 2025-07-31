@@ -38,14 +38,20 @@ O bot foi projetado para:
 
 Siga os passos abaixo para configurar e executar o bot:
 
-1. **Criação de um Ambiente Virtual (`venv`)**:  
+1. **Clonar o repositório**:  
+   Baixe o código do projeto para sua máquina.
+   ```bash
+   git clone https://github.com/seu-usuario/seu-repositorio.git
+   cd seu-repositorio
+
+2. **Criação de um Ambiente Virtual (`venv`)**:  
    É altamente recomendável criar um ambiente virtual para isolar as dependências do projeto.
 
    ```bash
    python -m venv venv
    ```
 
-2. **Ativar o Ambiente Virtual**:
+3. **Ativar o Ambiente Virtual**:
 
    - **Windows**:
      ```bash
@@ -56,7 +62,7 @@ Siga os passos abaixo para configurar e executar o bot:
      source venv/bin/activate
      ```
 
-3. **Instalar as dependências**:  
+4. **Instalar as dependências**:  
    Instale os pacotes necessários do SDK da Bot Framework.
 
    ```bash
@@ -64,7 +70,7 @@ Siga os passos abaixo para configurar e executar o bot:
    pip install "aiohttp"
    ```
 
-4. **Executar a aplicação**:  
+5. **Executar a aplicação**:  
    Com o ambiente virtual ativado e as dependências instaladas, você pode iniciar o bot.
    ```bash
    python app.py
