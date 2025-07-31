@@ -1,47 +1,80 @@
-﻿# EchoBot
+# 🤖 Echo Bot README
 
-Bot Framework v4 echo bot sample.
+Este é um bot simples, baseado no modelo de **Echo Bot** da Microsoft, que foi modificado para interagir com o usuário e coletar informações para a criação de um chamado de suporte.
 
-This bot has been created using [Bot Framework](https://dev.botframework.com), it shows how to create a simple bot that accepts input from the user and echoes it back.
+---
 
-## To try this sample
+## ✨ Funcionalidades do Bot
 
-- Clone the repository
-```bash
-git clone https://github.com/Microsoft/botbuilder-samples.git
-```
-- In a terminal, navigate to `botbuilder-samples\samples\python\02.echo-bot` folder
-- Activate your desired virtual environment
-- In the terminal, type `pip install -r requirements.txt`
-- Run your bot with `python app.py`
+O bot foi projetado para:
 
-## Testing the bot using Bot Framework Emulator
+- **👋 Saudar o usuário**: Ao ser adicionado a uma conversa, o bot envia uma mensagem de saudação.
+- **📝 Iniciar a criação de um chamado**: Ele escuta por frases-gatilho como "criar chamado", "abrir chamado" ou variações similares.
+- **📥 Coletar informações**: Após a ativação, ele guia o usuário para fornecer o título e a descrição do chamado.
+- **✅ Confirmar o chamado**: O bot exibe um resumo com o título e a descrição fornecidos para que o usuário possa confirmar as informações.
+- **🔁 Responder em 'echo'**: Se a mensagem do usuário não iniciar o processo de criação de um chamado, o bot simplesmente repete a mensagem recebida.
+- **💾 Gerenciar o estado da conversa**: O bot utiliza o `ConversationState` para manter o controle do fluxo da conversa, salvando e recuperando o estado do diálogo.
 
-[Bot Framework Emulator](https://github.com/microsoft/botframework-emulator) is a desktop application that allows bot developers to test and debug their bots on localhost or running remotely through a tunnel.
+---
 
-- Install the latest Bot Framework Emulator from [here](https://github.com/Microsoft/BotFramework-Emulator/releases)
+## 📂 Guia de Arquivos
 
-### Connect to the bot using Bot Framework Emulator
+- **`echo_bot.py`**: Contém a lógica principal do bot, implementando a classe `EchoBot`.  
+  Ele herda de `ActivityHandler` e define os métodos para lidar com diferentes tipos de atividades, como mensagens de texto e a adição de novos membros à conversa.  
+  Ele gerencia o fluxo de criação de chamados, armazenando o estado da conversa e as informações do chamado (título e descrição).
 
-- Launch Bot Framework Emulator
-- File -> Open Bot
-- Enter a Bot URL of `http://localhost:3978/api/messages`
+- **`app.py`**: Ponto de entrada da aplicação.  
+  Configura o servidor web (usando `aiohttp`) para escutar as mensagens da Bot Framework.  
+  Cria e configura o adaptador (`CloudAdapter`), o gerenciamento de estado (`ConversationState` e `MemoryStorage`) e a instância do bot (`EchoBot`).  
+  Define a rota `/api/messages` que processa as requisições recebidas.
 
-## Interacting with the bot
+- **`config.py`**: Define a classe `DefaultConfig`, que armazena as configurações do bot, como a porta do servidor e as credenciais (`APP_ID` e `APP_PASSWORD`).
 
-Enter text in the emulator.  The text will be echoed back by the bot.
+- **`__init__.py`**: Permite tratar o diretório `bots` como um pacote Python, possibilitando a importação da classe `EchoBot` em outros arquivos, como `app.py`.
 
-## Deploy the bot to Azure
+---
 
-To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+## 🚀 Guia de Utilização
 
-## Further reading
+Siga os passos abaixo para configurar e executar o bot:
 
-- [Bot Framework Documentation](https://docs.botframework.com)
-- [Bot Basics](https://docs.microsoft.com/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0)
-- [Activity processing](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-concept-activity-processing?view=azure-bot-service-4.0)
-- [Azure Bot Service Introduction](https://docs.microsoft.com/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
-- [Azure Bot Service Documentation](https://docs.microsoft.com/azure/bot-service/?view=azure-bot-service-4.0)
-- [Azure CLI](https://docs.microsoft.com/cli/azure/?view=azure-cli-latest)
-- [Azure Portal](https://portal.azure.com)
-- [Channels and Bot Connector Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-concepts?view=azure-bot-service-4.0)
+1. **Criação de um Ambiente Virtual (`venv`)**:  
+   É altamente recomendável criar um ambiente virtual para isolar as dependências do projeto.
+
+   ```bash
+   python -m venv venv
+   ```
+
+2. **Ativar o Ambiente Virtual**:
+
+   - **Windows**:
+     ```bash
+     venv\Scripts\activate
+     ```
+   - **macOS/Linux**:
+     ```bash
+     source venv/bin/activate
+     ```
+
+3. **Instalar as dependências**:  
+   Instale os pacotes necessários do SDK da Bot Framework.
+
+   ```bash
+   pip install "botbuilder-core==4.14.0"
+   pip install "aiohttp"
+   ```
+
+4. **Executar a aplicação**:  
+   Com o ambiente virtual ativado e as dependências instaladas, você pode iniciar o bot.
+   ```bash
+   python app.py
+   ```
+
+> **ℹ️ Dica:** O bot será executado localmente na porta `3978`, conforme definido no arquivo `config.py`.
+
+---
+
+💡 **Próximos passos:**
+
+- Configurar variáveis de ambiente para `APP_ID` e `APP_PASSWORD` (caso necessário).
+- Publicar o bot em um servidor ou serviço de hospedagem.
